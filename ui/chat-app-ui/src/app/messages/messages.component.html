@@ -1,0 +1,7 @@
+<div class="chat-body">
+  @for( item of messages; track item ) {
+    <div class="message incoming">
+      <span style="color: #000;">{{item.from}}: </span><p>{{item.content}}</p>
+    </div>
+  }
+</div>

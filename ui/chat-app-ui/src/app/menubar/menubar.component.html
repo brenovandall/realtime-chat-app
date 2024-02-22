@@ -1,0 +1,43 @@
+<div style="display: flex;">
+  <div style="background-color: #3B3F9A; min-height: 100vh; width: 30vw;">
+    <h1 style="color: #fff; text-align: center;" class="pt-2 pb-2">Usuários</h1>
+    @if(openChat === false) {
+      <div class="card-forms">
+        <form [formGroup]="userForm" (ngSubmit)="submitForm()" autocomplete="off" class="p-2" style="display: flex; flex-direction:column;">
+          <div>
+            <label class="form-label" style="color: #fff;">Digite seu nome:</label>
+            <input formControlName="name" class="form-control" placeholder="Digite Aqui" 
+            [class.is-invalid]="submitted && userForm.get('name')?.errors"/>
+            @if(submitted && userForm.get('name')?.hasError('required')) {
+              <span class="text-danger">Escolha um nome para continuar</span>
+            }
+            @if(submitted && userForm.get('name')?.hasError('minlength')) {
+              <span class="text-danger">O nome deve ter pelo menos 3 caracteres</span>
+            }
+            @if(submitted && userForm.get('name')?.hasError('maxlength')) {
+              <span class="text-danger">O nome não pode ter mais do que 15 caracteres</span>
+            }
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">Salvar</button>
+        </form>
+      </div>
+    }
+    @if(service.onlineUsers.length > 0){
+      @for(item of service.onlineUsers; track item) {
+        <div class="card-user" (dblclick)="openPrivateChat(item)">
+          <img class="profile-img" src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg" />
+          <div class="information">
+            <div style="color:#fff;">{{item}}</div>
+            <div class="badge bg-light" style="color:#3B3F9A;">Online</div>
+          </div>
+        </div>
+      }
+    }
+  </div>
+  @if(openChat == true) {
+    <div class="chat-container">
+      <app-chat (closeChatEmitter)="closeChat()" style="width: 100%;"></app-chat>
+    </div>
+  }
+</div>
+

@@ -1,0 +1,4 @@
+<form #messageForm="ngForm" (ngSubmit)="submitMessage()">
+  <input [(ngModel)]="content" name="content" required placeholder="Type your message" type="text">
+  <button [disabled]="!messageForm.valid">Send</button>
+</form>

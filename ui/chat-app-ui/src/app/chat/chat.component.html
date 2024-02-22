@@ -1,0 +1,9 @@
+<div class="chat-container">
+  <button (click)="backToHome()">Voltar ao início</button>
+  <div class="chat-card">
+    <app-messages [messages]="service.messages"></app-messages>
+    <div class="chat-footer">
+      <app-chat-input style="width: 100%;" (contentEmitter)="sendMessage($event)"></app-chat-input>
+    </div>
+  </div>
+</div>
